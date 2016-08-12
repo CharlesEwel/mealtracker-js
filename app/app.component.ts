@@ -1,22 +1,26 @@
 import { Component } from 'angular2/core';
-import { Object } from './object.model';
+import { Meal } from './meal.model';
+import { MealListComponent } from './meal-list.component';
 
 
 @Component({
   selector: 'my-app',
+  directives: [MealListComponent],
   template: `
-    <h1>testing</h1>
+    <h1>Meal Tracker</h1>
+    <meal-list [meals]=meals>
+    </meal-list>
   `
 })
 
 export class AppComponent {
-  public objects: Object[];
+  public meals: Meal[];
   constructor() {
-    this.objects = [
-      new Object("Object1", 0),
-      new Object("Object2", 1),
-      new Object("Object3", 2),
-      new Object("Object4", 3)
+    this.meals = [
+      new Meal("Breakfast", "Cereal and Milk", 300, 0),
+      new Meal("Lunch", "Braised Beef Sandwhich", 550, 1),
+      new Meal("Dinner", "Hamburger and Fries", 800, 2),
+      new Meal("Dessert", "Marionberry Milkshake", 400, 3)
     ]
   }
 }
