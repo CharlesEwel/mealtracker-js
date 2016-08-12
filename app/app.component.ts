@@ -7,9 +7,11 @@ import { MealListComponent } from './meal-list.component';
   selector: 'my-app',
   directives: [MealListComponent],
   template: `
-    <h1>Meal Tracker</h1>
-    <meal-list [meals]=meals>
-    </meal-list>
+    <div class="container">
+      <h1>Meal Tracker</h1>
+      <meal-list [meals]=meals>
+      </meal-list>
+    </div>
   `
 })
 
