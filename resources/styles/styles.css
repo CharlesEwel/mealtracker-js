@@ -1,3 +1,11 @@
 .selected {
   color: tomato;
 }
+
+edit-meal {
+  margin: 5px;
+}
+
+create-new-meal {
+  margin: 5px;
+}
