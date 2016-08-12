@@ -3,15 +3,22 @@ import { Meal } from './meal.model';
 import { MealComponent } from './meal.component';
 import { CreateNewMealComponent } from './create-new-meal.component';
 import { EditMealComponent } from './edit-meal.component';
+import { CaloriePipe } from './calorie.pipe';
 
 
 @Component({
   selector: 'meal-list',
   inputs: ['meals'],
   directives: [MealComponent, CreateNewMealComponent, EditMealComponent],
+  pipes: [CaloriePipe],
   template: `
+  <select (change)="onCalorieChange($event.target.value)" class="filter input-lg show-all">
+    <option value="all" selected="selected">Show All Meals</option>
+    <option value="high">Show High Calorie Meals</option>
+    <option value="low">Show Low Calorie Meals</option>
+  </select>
   <meal-display
-    *ngFor="#currentMeal of meals"
+    *ngFor="#currentMeal of meals | calories: filterCalories"
     (click)="mealClicked(currentMeal)"
     [class.selected]="currentMeal===selectedMeal"
     [meal]="currentMeal">
@@ -29,6 +36,7 @@ import { EditMealComponent } from './edit-meal.component';
 export class MealListComponent {
   public meals: Meal[];
   public selectedMeal: Meal;
+  public filterCalories: string = "all"
   constructor() {
   }
   createMeal(name: string, details: string, calories: string) {
@@ -38,5 +46,8 @@ export class MealListComponent {
   }
   mealClicked(clickedMeal: Meal): void {
     this.selectedMeal = clickedMeal;
+  }
+  onCalorieChange(filterOption){
+    this.filterCalories = filterOption;
   }
 }
