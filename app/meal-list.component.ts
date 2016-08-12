@@ -23,6 +23,7 @@ import { CaloriePipe } from './calorie.pipe';
     [class.selected]="currentMeal===selectedMeal"
     [meal]="currentMeal">
   </meal-display>
+  <h4>Total Calories: {{calculateTotalCalories()}}</h4>
   <edit-meal
     *ngIf="selectedMeal"
     [meal]="selectedMeal">
@@ -49,5 +50,14 @@ export class MealListComponent {
   }
   onCalorieChange(filterOption){
     this.filterCalories = filterOption;
+  }
+  calculateTotalCalories(){
+    var total: number = 0;
+    this.meals.forEach(function(meal){
+      if(meal.calories > 0) {
+        total+=meal.calories;
+      }
+    })
+    return total;
   }
 }
